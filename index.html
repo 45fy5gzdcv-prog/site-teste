@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verificação</title>
+
+<style>
+    body {
+        margin: 0;
+        background: #050505;
+        color: #00ff66;
+        font-family: monospace;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+    }
+
+    .box {
+        width: 90%;
+        max-width: 600px;
+    }
+
+    .ip {
+        color: white;
+        margin-bottom: 25px;
+    }
+
+    .bar {
+        width: 100%;
+        height: 25px;
+        border: 1px solid #00ff66;
+    }
+
+    .progress {
+        width: 0%;
+        height: 100%;
+        background: #00ff66;
+    }
+
+    #percent {
+        margin-top: 10px;
+    }
+
+    #close {
+        display: none;
+        margin-top: 25px;
+        padding: 12px 25px;
+        cursor: pointer;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="box">
+    <h2 id="message">ACESSANDO BANCO DE DADOS</h2>
+
+    <div class="ip">
+        IP detectado: 192.0.2.123
+    </div>
+
+    <div class="bar">
+        <div class="progress" id="progress"></div>
+    </div>
+
+    <div id="percent">0%</div>
+
+    <button id="close" onclick="window.close()">Fechar</button>
+</div>
+
+<script>
+let percent = 0;
+
+const messages = {
+    20: "ANALISANDO DADOS COLETADOS",
+    40: "PROCESSANDO DADOS DE USUÁRIO",
+    80: "DADOS COLETADOS SENDO ENVIADOS PARA A NUVEM DE _xXKRTOXx_"
+};
+
+const timer = setInterval(() => {
+    percent++;
+
+    document.getElementById("progress").style.width = percent + "%";
+    document.getElementById("percent").textContent = percent + "%";
+
+    if (messages[percent]) {
+        document.getElementById("message").textContent =
+            messages[percent];
+    }
+
+    if (percent >= 100) {
+        clearInterval(timer);
+
+        document.getElementById("message").textContent =
+            "PROCESSO CONCLUÍDO";
+
+        document.getElementById("close").style.display =
+            "inline-block";
+    }
+}, 50);
+</script>
+
+</body>
+</html>
